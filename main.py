@@ -12,8 +12,11 @@ recipient = os.environ.get("recipient")
 
 my_email = "riccardofeingold@gmail.com"
 
-connection = smtplib.SMTP("smtp.gmail.com") # connection to the mail server
-connection.starttls() # this makes the connection to the mail server secure
-connection.login(user=my_email, password=password)
-connection.sendmail(from_addr=my_email, to_addrs=recipient, msg="HELLO!")
-connection.close()
+with smtplib.SMTP("smtp.gmail.com") as connection: # connection to the mail server
+    connection.starttls() # this makes the connection to the mail server secure
+    connection.login(user=my_email, password=password)
+    connection.sendmail(
+        from_addr=my_email,
+        to_addrs=recipient,
+        msg="Subject:HELLO!\n\nThis is the body of my email."
+    )
